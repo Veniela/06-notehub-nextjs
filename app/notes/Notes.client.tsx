@@ -18,11 +18,16 @@ export default function NotesClient() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string>('');
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['notes', { page, search }],
-    queryFn: () => fetchNotes({ page, search }),
-    placeholderData: keepPreviousData,
-  });
+const { data, isLoading, isError } = useQuery({
+  queryKey: ['notes', { page, search }],
+  queryFn: () =>
+    fetchNotes({
+      page,
+      perPage: 12, // постав свою кількість нотаток на сторінку
+      search,
+    }),
+  placeholderData: keepPreviousData,
+});
 
   const totalPages = data?.totalPages || 1;
 

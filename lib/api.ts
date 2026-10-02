@@ -63,6 +63,11 @@ export async function createNote(payload: CreateNotePayload): Promise<Note> {
   return data;
 }
 
+export const fetchNoteById = async (id: string): Promise<Note> => {
+  const response = await notehubApi.get<Note>(`/notes/${id}`);
+  return response.data;
+};
+
 export async function deleteNote(noteId: string): Promise<Note> {
   const { data } = await notehubApi.delete<Note>(`/notes/${noteId}`);
   return data;
